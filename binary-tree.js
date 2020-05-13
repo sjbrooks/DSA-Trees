@@ -17,7 +17,7 @@ class BinaryTree {
    * the length of the shortest path from the root to a leaf. */
 
   minDepth() {
-    let shortestSoFar;
+    let shortestSoFar = Infinity;
     let edges = 0;
     let nodesToEvalStack = [this.root];
 
@@ -26,6 +26,8 @@ class BinaryTree {
     // etc...
     // when we reach a node that does not have children, we've reached a leaf
     // if current edges count is less that shortest so far, then set shortestSoFar to edges
+    // reset edges
+
 
     // while we still have nodes in our stack
     while (nodesToEvalStack.length) {
@@ -33,18 +35,17 @@ class BinaryTree {
       let current = nodesToEvalStack.pop();
 
       if (current) {
-        // add to the numberNodesGreater if node's value is greater than lowerBound
-        if (current.val > lowerBound) numberNodesGreater++;
-        
-        // if the node has add any of its child nodes to the stack
-        for (let child of current.children) {
-          nodesToEvalStack.push(child);
+        edges++;
+        if (current.left === null && current.right === null) {
+          if (edges < shortestSoFar) shortestSoFar = edges;
+          edges = 1;
         }
+        // if the node has add any of its child nodes to the stack
+        if (current.left) nodesToEvalStack.push(current.left);
+        if (current.right) nodesToEvalStack.push(current.right);
       }
     }
-    return numberNodesGreater;
-  }
-
+    return shortestSoFar;
   }
 
   /** maxDepth(): return the maximum depth of the tree -- that is,
@@ -95,7 +96,7 @@ class BinaryTree {
    * of two nodes in a binary tree. */
 
   lowestCommonAncestor(node1, node2) {
-    
+
   }
 }
 
