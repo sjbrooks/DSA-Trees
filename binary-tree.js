@@ -17,6 +17,33 @@ class BinaryTree {
    * the length of the shortest path from the root to a leaf. */
 
   minDepth() {
+    let shortestSoFar;
+    let edges = 0;
+    let nodesToEvalStack = [this.root];
+
+    // from parent, if that parent has children, add them to stack and increment edge count
+    // inside each child, if that child has children, add them to stack and increment edge count
+    // etc...
+    // when we reach a node that does not have children, we've reached a leaf
+    // if current edges count is less that shortest so far, then set shortestSoFar to edges
+
+    // while we still have nodes in our stack
+    while (nodesToEvalStack.length) {
+      // grab the node at the top of the stack
+      let current = nodesToEvalStack.pop();
+
+      if (current) {
+        // add to the numberNodesGreater if node's value is greater than lowerBound
+        if (current.val > lowerBound) numberNodesGreater++;
+        
+        // if the node has add any of its child nodes to the stack
+        for (let child of current.children) {
+          nodesToEvalStack.push(child);
+        }
+      }
+    }
+    return numberNodesGreater;
+  }
 
   }
 
